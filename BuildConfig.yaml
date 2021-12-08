@@ -1,0 +1,29 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: build-test2
+  namespace: build-test
+  labels:
+    build: build-test2
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: $APP_IMAGE
+    pushSecret:
+      name: nexus-secret
+  resources: {}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: build-test
+        name: 'golang:alpine'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      url: 'https://github.com/VikneshSuresh/build-test'
+  runPolicy: Serial
