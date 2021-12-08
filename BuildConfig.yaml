@@ -1,29 +1,52 @@
-kind: BuildConfig
 apiVersion: build.openshift.io/v1
+kind: BuildConfig
 metadata:
-  name: build-test2
-  namespace: build-test
+  annotations:
+    openshift.io/generated-by: OpenShiftNewBuild
+  creationTimestamp: "2021-12-08T07:20:24Z"
+  generation: 2
   labels:
-    build: build-test2
+    build: helloworld-openshift
+  name: helloworld-openshift
+  namespace: jolin-test
+  resourceVersion: "55644184"
+  uid: 67a4c157-9842-48b6-b957-41422237b478
 spec:
+  failedBuildsHistoryLimit: 5
   nodeSelector: null
   output:
     to:
-      kind: DockerImage
-      name: $APP_IMAGE
-    pushSecret:
-      name: nexus-secret
+      kind: ImageStreamTag
+      name: helloworld-openshift:latest
+  postCommit: {}
   resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/LiXianTee/helloworld-openshift.git
+    type: Git
   strategy:
-    type: Docker
     dockerStrategy:
       from:
         kind: ImageStreamTag
-        namespace: build-test
-        name: 'golang:alpine'
-  postCommit: {}
-  source:
-    type: Git
-    git:
-      url: 'https://github.com/VikneshSuresh/build-test'
-  runPolicy: Serial
+        name: golang:alpine
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: srCFqN7KL102hi63T5jj
+    type: GitHub
+  - generic:
+      secret: 3qSNXZXdj17rcHITwNv_
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: 10.168.0.76:9000/dev-registry/golang@sha256:ea5d6a7cf667df5041c09dc3741fc091fc07e6c8f996b580c1161d44313358b4
+    type: ImageChange
+status:
+  imageChangeTriggers:
+  - from:
+      name: golang:alpine
+    lastTriggerTime: "2021-12-08T07:20:25Z"
+    lastTriggeredImageID: 10.168.0.76:9000/dev-registry/golang@sha256:ea5d6a7cf667df5041c09dc3741fc091fc07e6c8f996b580c1161d44313358b4
+  lastVersion: 1
