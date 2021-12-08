@@ -1,5 +1,5 @@
 # Use a container with Go pre-installed
-FROM golang:alpine
+FROM default-route-openshift-image-registry.apps.okd.lab.mez9.local/jolin-test/golang:alpine
 
 # Copy our source file into the container
 COPY src/hello-world.go /go/hello-world.go
