@@ -1,5 +1,5 @@
 # Use a container with Go pre-installed
-FROM image-registry.openshift-image-registry.svc:5000/jolin-test/golang
+FROM image-registry.openshift-image-registry.svc:5000/jolin-test/golang:alpine
 
 # Copy our source file into the container
 COPY src/hello-world.go /go/hello-world.go
