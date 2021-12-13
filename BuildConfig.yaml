@@ -9,9 +9,9 @@ spec:
   strategy: 
     dockerStrategy:
       dockerfilePath: Dockerfile
-  output: 
+  output:
     to:
-      kind: ImageStreamTag
-      name: helloworld-openshift:1.2
+      kind: DockerImage
+      name: $APP_IMAGE
     pushSecret:
       name: nexus-secret
