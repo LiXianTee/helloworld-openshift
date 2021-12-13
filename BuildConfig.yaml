@@ -11,7 +11,7 @@ spec:
       dockerfilePath: Dockerfile
   output: 
     to:
-      kind: ImageSreamTag
+      kind: ImageStreamTag
       name: helloworld-openshift:1.2
     pushSecret:
       name: nexus-secret
