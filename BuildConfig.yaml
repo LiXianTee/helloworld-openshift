@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: "openshift-build-pipeline" 
+  name: "openshift-build-pipeline-$VERSION" 
 spec:
   source: 
     git:
